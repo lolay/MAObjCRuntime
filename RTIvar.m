@@ -54,13 +54,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_name release];
-    [_typeEncoding release];
-    [super dealloc];
-}
-
 - (NSString *)name
 {
     return _name;
@@ -82,12 +75,12 @@
 
 + (id)ivarWithObjCIvar: (Ivar)ivar
 {
-    return [[[self alloc] initWithObjCIvar: ivar] autorelease];
+    return [[self alloc] initWithObjCIvar: ivar];
 }
 
 + (id)ivarWithName: (NSString *)name typeEncoding: (NSString *)typeEncoding
 {
-    return [[[self alloc] initWithName: name typeEncoding: typeEncoding] autorelease];
+    return [[self alloc] initWithName: name typeEncoding: typeEncoding];
 }
 
 + (id)ivarWithName: (NSString *)name encode: (const char *)encodeStr
@@ -97,7 +90,6 @@
 
 - (id)initWithObjCIvar: (Ivar)ivar
 {
-    [self release];
     return [[_RTObjCIvar alloc] initWithObjCIvar: ivar];
 }
 

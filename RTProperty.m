@@ -21,12 +21,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_attributes release];
-    [super dealloc];
-}
-
 - (NSString *)name
 {
     return [NSString stringWithUTF8String: property_getName(_property)];
@@ -115,12 +109,11 @@
 
 + (id)propertyWithObjCProperty: (objc_property_t)property
 {
-    return [[[self alloc] initWithObjCProperty: property] autorelease];
+    return [[self alloc] initWithObjCProperty: property];
 }
 
 - (id)initWithObjCProperty: (objc_property_t)property
 {
-    [self release];
     return [[_RTObjCProperty alloc] initWithObjCProperty: property];
 }
 

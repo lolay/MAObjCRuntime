@@ -68,12 +68,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_sig release];
-    [super dealloc];
-}
-
 - (SEL)selector
 {
     return _sel;
@@ -100,23 +94,21 @@
 
 + (id)methodWithObjCMethod: (Method)method
 {
-    return [[[self alloc] initWithObjCMethod: method] autorelease];
+    return [[self alloc] initWithObjCMethod: method];
 }
 
 + (id)methodWithSelector: (SEL)sel implementation: (IMP)imp signature: (NSString *)signature
 {
-    return [[[self alloc] initWithSelector: sel implementation: imp signature: signature] autorelease];
+    return [[self alloc] initWithSelector: sel implementation: imp signature: signature];
 }
 
 - (id)initWithObjCMethod: (Method)method
 {
-    [self release];
     return [[_RTObjCMethod alloc] initWithObjCMethod: method];
 }
 
 - (id)initWithSelector: (SEL)sel implementation: (IMP)imp signature: (NSString *)signature
 {
-    [self release];
     return [[_RTComponentsMethod alloc] initWithSelector: sel implementation: imp signature: signature];
 }
 
